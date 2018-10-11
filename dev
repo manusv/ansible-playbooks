@@ -1,7 +1,7 @@
 [webserver]
 34.232.65.239
 [control]
-54.173.130.57 ansible_connection=local
+34.230.38.234 ansible_connection=local
 
 [load]
 18.212.64.232
