@@ -42,3 +42,20 @@
             load_balancer_port: 80
             instance_port: 80
       register: elb
+
+    - name: Create EC2 instances
+      ec2:
+        key_name: vztest
+        instance_type: t2.nano
+        image: ami-06b5810be11add0e2
+        region: us-east-1
+        group_id:
+          - "{{ webservers_group.group_id }}"
+          - "{{ elb.elb.security_group_ids | first }}"
+        wait: yes
+        instance_tags:
+          application: ansibletest
+        exact_count: 2
+        count_tag:
+          application: ansibletest
+      register: ec2_instances
