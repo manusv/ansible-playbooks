@@ -1,0 +1,7 @@
+---
+- hosts: database
+  sudo: yes
+  tasks: 
+    - name: install apache server
+      apt: name=apache2 state=present update_cache=yes 
+    

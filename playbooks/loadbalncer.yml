@@ -1,0 +1,9 @@
+---
+ - hosts: load 
+   sudo: yes
+   tasks:
+     - name: install nginx
+       apt: name=nginx state=present update_cache=yes 
+     - name: ensure enginx started
+       service: name=nginx state=started enabled=yes
+
