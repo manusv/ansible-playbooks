@@ -12,7 +12,7 @@
       ec2_group:
         name: webservers
         description: A security group for my current IP
-        region: us-west-1
+        region: us-east-1
         rules:
           - proto: tcp
             from_port: 80
@@ -28,3 +28,17 @@
             to_port: 80
             cidr_ip: 0.0.0.0/0
       register: webservers_group
+
+    - name: Create the ELB only listening over port 80
+      ec2_elb_lb:
+        name: ansibletest-load-balancer
+        state: present
+        region: us-east-1
+        zones:
+          - us-east-1a
+          - us-east-1b
+        listeners:
+          - protocol: http
+            load_balancer_port: 80
+            instance_port: 80
+      register: elb
